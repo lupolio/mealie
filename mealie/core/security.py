@@ -43,7 +43,13 @@ def user_from_ldap(session, username: str, password: str) -> UserInDB:
         )
 
     if settings.LDAP_ADMIN_FILTER:
-        user.admin = len(conn.search_s(user_dn, ldap.SCOPE_BASE, settings.LDAP_ADMIN_FILTER, [])) > 0
+        if settings.LDAP_BASE_DN:
+            admin_filter=settings.LDAP_ADMIN_FILTER.format(user_dn)
+            user.admin = len(conn.search_s(settings.LDAP_BASE_DN, ldap.SCOPE_SUBTREE, admin_filter, ['dn'])) > 0
+        else:
+            print("no ldad base dn given")
+            user.admin = len(conn.search_s(user_dn, ldap.SCOPE_BASE, settings.LDAP_ADMIN_FILTER, [])) > 0
+
         db.users.update(session, user.id, user)
 
     return user

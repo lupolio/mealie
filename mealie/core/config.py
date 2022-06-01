@@ -155,6 +155,7 @@ class AppSettings(BaseSettings):
     LDAP_SERVER_URL: str = None
     LDAP_BIND_TEMPLATE: str = None
     LDAP_ADMIN_FILTER: str = None
+    LDAP_BASE_DN: str = None
 
     SCHEDULER_DATABASE = f"sqlite:///{app_dirs.DATA_DIR.joinpath('scheduler.db')}"
 

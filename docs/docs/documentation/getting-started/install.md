@@ -1,4 +1,4 @@
-# Installation
+LDAP_ADMIN_FILTER# Installation
 
 To deploy mealie on your local network it is highly recommended to use docker to deploy the image straight from dockerhub. Using the docker-compose below you should be able to get a stack up and running easily by changing a few default values and deploying. You can deploy with either SQLite (default) or Postgres. SQLite is sufficient for most use cases. Additionally, with mealies automated backup and restore functionality, you can easily move between SQLite and Postgres as you wish.
 
@@ -132,6 +132,7 @@ services:
 | LDAP_SERVER_URL         | None                  | LDAP server URL (e.g. ldap://ldap.example.com)                                                                                    |
 | LDAP_BIND_TEMPLATE      | None                  | Templated DN for users, `{}` will be replaced with the username (e.g. `cn={},dc=example,dc=com`)                                  |
 | LDAP_ADMIN_FILTER       | None                  | Optional LDAP filter, which tells Mealie the LDAP user is an admin (e.g. `(memberOf=cn=admins,dc=example,dc=com)`)                |
+| LDAP_BASE_DN            | None                  | Optional BASE DN; needed in case you want to use an AD and use the userPrincipalName to login (e.g. `CN=Users,DC=xx,DC=yy,DC=de`) | 
 | RECIPE_PUBLIC           | True                  | Default Recipe Settings - Make Recipe Public                                                                                      |
 | RECIPE_SHOW_NUTRITION   | True                  | Default Recipe Settings - Show Recipe Nutrition                                                                                   |
 | RECIPE_SHOW_ASSETS      | True                  | Default Recipe Settings - Show Recipe Assets                                                                                      |
